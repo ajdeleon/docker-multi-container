@@ -1,0 +1,36 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "ajdeleon/multi-client",
+      "hostname": "client",
+      "essential": false,
+    },
+    {
+      "name": "server",
+      "image": "ajdeleon/multi-server",
+      "hostname": "api",
+      "essential": false,
+    },
+    {
+      "name": "worker",
+      "image": "ajdeleon/multi-worker",
+      "hostname": "worker",
+      "essential": false,
+    },
+    {
+      "name": "nginx",
+      "image": "ajdeleon/multi-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"]
+    },
+  ]
+}
